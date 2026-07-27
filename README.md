@@ -45,9 +45,9 @@ Before connecting the local AD, a manual test was done directly in the cloud ten
 3. Created a Security Group (not Distribution) with **Assigned** membership.
 4. Added the test user as a **Member**, and set the account as **Owner**.
 
-![Manual Test User](screenshots/entra-test-user.png)
+![Manual Test User](screenshots/ms-create-user.png)
 
-![Manual Test Group](screenshots/entra-test-group.png)
+![Manual Test Group](screenshots/ms-create-new-group.png)
 
 ---
 
@@ -68,7 +68,7 @@ Before installing any sync tool, the Domain Controller needed confirmed internet
 1. Downloaded Microsoft Entra Connect directly from the Entra admin center (**Identity → Hybrid Management → Microsoft Entra Connect → Get Started → Download Connect Sync Agent**) — Microsoft has retired the old public Download Center link for this tool.
 2. Ran the installer inside the Domain Controller VM.
 
-![Entra Connect Installer](screenshots/entra-connect-install.png)
+![Entra Connect Installer](screenshots/ms-download-ADconnect.png)
 
 ---
 
@@ -91,15 +91,24 @@ Chose **"Sync selected domains and OUs"** rather than syncing everything, to dem
 **Optional Features**
 Left all optional features (Password Writeback, Group Writeback, Device Writeback) unchecked — none were necessary to demonstrate the core hybrid sync mechanism.
 
-![Configuration Summary](screenshots/entra-connect-ready-to-configure.png)
-
+![Installation](screenshots/ms-entra-connect-installation.png)
+![Installation](screenshots/ms-user-sign-in.png)
+![Synced Users Confirmed](screenshots/ms-entra-connect-admin-sign-in.png)
+![Installation](screenshots/ms-entra-signin-.png)
+![Installation](screenshots/ms-domain-ou-filtering.png)
+![Installation](screenshots/ms-identifying-users.png)
+![Installation](screenshots/ms-entra-connect-filtering.png)
+![Installation](screenshots/ms-optional-features.png)
+![Installation](screenshots/ms-entra-connect-configure.png)
+![Configuration Complete](screenshots/ms-configuration-complete.png)
 ---
 
 ## Result — Sync Confirmed Working
 
 After configuration completed, the Entra ID Users list showed real local Active Directory users now present in the cloud tenant, each correctly flagged **On-premises: Yes** — a direct contrast to the earlier manual test user, which correctly still showed **On-premises: No**.
 
-![Synced Users Confirmed](screenshots/entra-users-synced.png)
+![Synced Users Confirmed](screenshots/ms-users-list-sync.png)
+
 
 ---
 
@@ -107,9 +116,13 @@ After configuration completed, the Entra ID Users list showed real local Active 
 
 **Access Denied — missing Hybrid Identity Administrator role**
 Being Global Administrator alone was not sufficient to authorize the sync tool. The more specific **Hybrid Identity Administrator** role had to be explicitly assigned, in addition to Global Administrator.
+![Synced Users Confirmed](screenshots/ms-entra-connect-sync-error.png)
+![Synced Users Confirmed](screenshots/ms-entra-connect-log-error.png)
 
 **Same error persisted after role assignment — Home Realm Discovery**
 Signing in with a university email address caused Microsoft's login system to automatically route authentication back to the university's own tenant, rather than the intended tenant — even though the account held the correct roles in the intended tenant. Fixed by creating a **dedicated admin account native to the new tenant** (with no other organization's domain attached to it), removing any routing ambiguity.
+
+![Synced Users Confirmed](screenshots/ms-sync-admin-role.png)
 
 **Unsupported browser during account security setup**
 The Domain Controller's built-in browser couldn't complete a new account's first-time security setup step. Resolved by completing that one-time setup from a modern browser on a separate device, after which the Domain Controller's sign-in completed normally.
