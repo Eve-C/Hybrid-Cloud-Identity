@@ -59,7 +59,6 @@ Before installing any sync tool, the Domain Controller needed confirmed internet
 2. Tested raw connectivity: `ping 8.8.8.8` — successful, confirming outbound internet access works.
 3. Tested DNS resolution: `nslookup microsoft.com` — successful, confirming domain name resolution works.
 
-![Connectivity Test](screenshots/dc-connectivity-test.png)
 
 ---
 
@@ -108,6 +107,7 @@ Left all optional features (Password Writeback, Group Writeback, Device Writebac
 After configuration completed, the Entra ID Users list showed real local Active Directory users now present in the cloud tenant, each correctly flagged **On-premises: Yes** — a direct contrast to the earlier manual test user, which correctly still showed **On-premises: No**.
 
 ![Synced Users Confirmed](screenshots/ms-users-list-sync.png)
+![Synced Users Confirmed](screenshots/ms-total-groups.png)
 
 
 ---
