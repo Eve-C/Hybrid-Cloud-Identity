@@ -32,7 +32,7 @@ This mirrors how most real organizations run today: not fully on-prem, not fully
 2. Created a dedicated Microsoft Entra ID tenant, separate from any existing organization's tenant.
 3. Confirmed **Global Administrator** role on the new tenant.
 
-![Tenant Overview](screenshots/entra-tenant-overview.png)
+![Tenant Overview](screenshots/ms-tenant-creation.png)
 
 ---
 
